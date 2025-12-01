@@ -1,19 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+import { fetchOrganizations } from "../utils/api";
 
 const FETCH_ORGS_QUERY_KEY = "FETCH_ORGS_QUERY_KEY";
 
-export default function useFetchOrgs() {
-  const [searchParams] = useSearchParams();
-
+export default function useFetchOrgs(username: string) {
   const queryData = useQuery({
     queryKey: [FETCH_ORGS_QUERY_KEY],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.github.com/users/${searchParams.get("username")}/orgs`
-      );
-      return response.json();
-    },
+    queryFn: async () => fetchOrganizations(username),
   });
 
   return queryData;
