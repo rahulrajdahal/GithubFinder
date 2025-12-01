@@ -10,7 +10,9 @@ export default function useFetchRepos() {
     queryKey: [FETCH_REPOS_QUERY_KEY],
     queryFn: async () => {
       const response = await fetch(
-        `https://api.github.com/users/${searchParams.get("username")}/repos`
+        `${import.meta.env.VITE_GITHUB_API}/users/${searchParams.get(
+          "username"
+        )}/repos`
       );
       return response.json();
     },
