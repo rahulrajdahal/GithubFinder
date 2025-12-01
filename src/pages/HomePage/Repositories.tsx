@@ -1,21 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import { EmptyData, Loader, RepoCard } from "../../components";
 import { Repository } from "../../components/RepoCard";
+import { useFetchRepos } from "../../hooks";
 
 export default function RepositoriesPage() {
   const [searchParams] = useSearchParams();
+  const username = searchParams.get("username") as string;
 
-  const { isLoading, data } = useQuery({
-    queryKey: ["repos"],
-    queryFn: async () => {
-      const response = await fetch(
-        `https://api.github.com/users/${searchParams.get("username")}/repos`
-      );
-      return response.json();
-    },
-    // enabled: !!searchParams.get("username"),
-  });
+  const { isLoading, data } = useFetchRepos(username);
 
   if (isLoading) {
     return <Loader className="mt-64" />;

@@ -1,9 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 import { EmptyData, Loader } from "../../components";
 import OrgCard, { Organization } from "../../components/OrgCard";
+import useFetchOrgs from "../../hooks/useFetchUser";
 
 export default function OrganizationsPage() {
-  const { isLoading, data } = useQuery({ queryKey: ["orgs"] });
+  const [searchParams] = useSearchParams();
+  const username = searchParams.get("username") as string;
+
+  const { isLoading, data } = useFetchOrgs(username);
 
   if (isLoading) {
     return <Loader className="mt-64" />;
