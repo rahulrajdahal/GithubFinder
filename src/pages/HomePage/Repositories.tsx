@@ -12,7 +12,7 @@ export default function RepositoriesPage() {
 
   const repositories = data as Repository[];
 
-  return repositories.length > 0 ? (
+  return repositories?.length > 0 ? (
     repositories.map((repository) => (
       <RepoCard key={repository.id} repo={repository} />
     ))

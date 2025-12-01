@@ -12,7 +12,7 @@ export default function OrganizationsPage() {
   }
   const organizations = data as Organization[];
 
-  return organizations.length > 0 ? (
+  return organizations?.length > 0 ? (
     organizations.map((organization) => (
       <OrgCard key={organization.id} org={organization} />
     ))
