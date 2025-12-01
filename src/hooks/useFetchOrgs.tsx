@@ -7,6 +7,7 @@ export default function useFetchOrgs(username: string) {
   const queryData = useQuery({
     queryKey: [FETCH_ORGS_QUERY_KEY, username],
     queryFn: async () => fetchOrganizations(username),
+    enabled: !!username,
   });
 
   return queryData;

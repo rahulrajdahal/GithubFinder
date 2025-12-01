@@ -7,6 +7,7 @@ export default function useFetchRepos(username: string) {
   const queryData = useQuery({
     queryKey: [FETCH_REPOS_QUERY_KEY, username],
     queryFn: async () => fetchRepositories(username),
+    enabled: !!username,
   });
 
   return queryData;

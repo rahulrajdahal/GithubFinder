@@ -22,7 +22,7 @@ export default function HomePage() {
           {tabs.map(({ id, title }) => (
             <Tabs.Trigger
               key={id}
-              className="text-grey-400 text-lg data-[state=active]:border-b-2 data-[state=active]:border-blue-default leading-[1.125rem] font-bold data-[state=active]:text-blue-default"
+              className="text-grey-400 text-lg data-[state=active]:border-b-2 data-[state=active]:border-blue-default leading-4.5 font-bold data-[state=active]:text-blue-default"
               value={title}
             >
               {title}
@@ -39,26 +39,10 @@ export default function HomePage() {
               <UserData />
               <div
                 className={`grid place-items-center grid-cols-2 gap-5 w-full`}
-                // max-h-[calc(100vh-23rem)] thin-scrollbar overflow-y-scroll h-full overflow-x-hidden w-max
               >
                 {content}
               </div>
             </div>
-            {/* {isLoading || reposLoading || orgsLoading ? (
-              <Loader />
-            ) : data && data.login !== "null" ? (
-              <div className="flex flex-col md:flex-row max-w-[58.75rem] w-full gap-5">
-                <UserData />
-                <div
-                  className={`grid place-items-center grid-cols-2 gap-5 w-full`}
-                  // max-h-[calc(100vh-23rem)] thin-scrollbar overflow-y-scroll h-full overflow-x-hidden w-max
-                >
-                  {content}
-                </div>
-              </div>
-            ) : (
-              <EmptyData />
-            )} */}
           </Tabs.Content>
         ))}
       </Tabs.Root>

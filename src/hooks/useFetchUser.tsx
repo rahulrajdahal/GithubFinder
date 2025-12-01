@@ -7,6 +7,7 @@ export default function useFetchUser(username: string) {
   const queryData = useQuery({
     queryKey: [FETCH_USER_QUERY_KEY, username],
     queryFn: async () => await fetchUser(username),
+    enabled: !!username,
   });
 
   return queryData;
