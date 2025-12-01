@@ -1,13 +1,17 @@
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 import { EmptyData, Loader, RepoCard } from "../../components";
 import { Repository } from "../../components/RepoCard";
-import { useFetchRepos } from "../../hooks";
+import { useFetchRepos, useGetUsername } from "../../hooks";
 
 export default function RepositoriesPage() {
-  const [searchParams] = useSearchParams();
-  const username = searchParams.get("username") as string;
+  const username = useGetUsername();
+  const { isLoading, data, refetch } = useFetchRepos(username);
 
-  const { isLoading, data } = useFetchRepos(username);
+  useEffect(() => {
+    if (username) {
+      refetch();
+    }
+  }, [username]);
 
   if (isLoading) {
     return <Loader className="mt-64" />;

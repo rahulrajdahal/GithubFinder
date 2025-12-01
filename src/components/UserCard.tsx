@@ -1,3 +1,5 @@
+import Loader from "./Loader";
+
 type User = {
   name: string;
   avatar_url: string;
@@ -5,14 +7,20 @@ type User = {
   public_repos: number;
 };
 
-interface UserDataProps {
+interface UserCardProps {
   data: User;
   orgsCount?: number;
+  isLoading?: boolean;
 }
-export default function UserData({
+export default function UserCard({
   data,
   orgsCount = 0,
-}: Readonly<UserDataProps>) {
+  isLoading = false,
+}: Readonly<UserCardProps>) {
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="md:sticky top-4 flex border h-[21.25rem] w-full max-w-[18.75rem] border-gray-300 bg-white rounded-lg flex-col gap-6 items-center justify-center px-8 py-10">
       <img

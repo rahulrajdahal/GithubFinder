@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root,
 body {
@@ -16,4 +14,19 @@ body {
   .thin-scrollbar {
     scrollbar-width: thin;
   }
+}
+
+@theme {
+  /* Blue */
+  --color-blue-default: #185adb;
+  /* Grey */
+  --color-grey-50: #f8fafc;
+  --color-grey-100: #f0f5f9;
+  --color-grey-300: #cad5e0;
+  --color-grey-400: #91a4b7;
+  --color-grey-600: #445668;
+  --color-grey-800: #1c2a3a;
+  --color-grey-900: #0d1829;
+
+  --animate-spin-slow: var(--animate-spin) 1.5s linear infinite;
 }

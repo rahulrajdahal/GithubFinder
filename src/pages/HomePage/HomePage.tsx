@@ -1,9 +1,7 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { useQueries } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Organizations, Repositories } from "..";
-import { EmptyData, HomePageLayout, Loader, UserData } from "../../components";
+import { HomePageLayout } from "../../components";
+import UserData from "./UserData";
 
 const tabs = [
   { id: 1, title: "Repositories", content: <Repositories /> },
@@ -11,55 +9,6 @@ const tabs = [
 ];
 
 export default function HomePage() {
-  const [searchParams] = useSearchParams();
-
-  const [
-    { data, isLoading, refetch },
-    { isLoading: reposLoading, refetch: refetchRepos },
-    { isLoading: orgsLoading, refetch: refetchOrgs },
-  ] = useQueries({
-    queries: [
-      {
-        queryKey: ["user"],
-        queryFn: async () => {
-          const response = await fetch(
-            `https://api.github.com/users/${searchParams.get("username")}`
-          );
-          return response.json();
-        },
-        enabled: !!searchParams.get("username"),
-      },
-      {
-        queryKey: ["repos"],
-        queryFn: async () => {
-          const response = await fetch(
-            `https://api.github.com/users/${searchParams.get("username")}/repos`
-          );
-          return response.json();
-        },
-        // enabled: !!searchParams.get("username"),
-      },
-      {
-        queryKey: ["orgs"],
-        queryFn: async () => {
-          const response = await fetch(
-            `https://api.github.com/users/${searchParams.get("username")}/orgs`
-          );
-          return response.json();
-        },
-        // enabled: !!searchParams.get("username"),
-      },
-    ],
-  });
-
-  useEffect(() => {
-    if (searchParams.get("username")) {
-      refetch();
-      refetchRepos();
-      refetchOrgs();
-    }
-  }, [searchParams, refetch, refetchRepos, refetchOrgs]);
-
   return (
     <HomePageLayout>
       <Tabs.Root
@@ -86,11 +35,20 @@ export default function HomePage() {
             className="flex w-full outline-none border-none flex-col items-center"
             value={title}
           >
-            {isLoading || reposLoading || orgsLoading ? (
+            <div className="flex flex-col md:flex-row max-w-235 w-full gap-5">
+              <UserData />
+              <div
+                className={`grid place-items-center grid-cols-2 gap-5 w-full`}
+                // max-h-[calc(100vh-23rem)] thin-scrollbar overflow-y-scroll h-full overflow-x-hidden w-max
+              >
+                {content}
+              </div>
+            </div>
+            {/* {isLoading || reposLoading || orgsLoading ? (
               <Loader />
             ) : data && data.login !== "null" ? (
               <div className="flex flex-col md:flex-row max-w-[58.75rem] w-full gap-5">
-                <UserData data={data} />
+                <UserData />
                 <div
                   className={`grid place-items-center grid-cols-2 gap-5 w-full`}
                   // max-h-[calc(100vh-23rem)] thin-scrollbar overflow-y-scroll h-full overflow-x-hidden w-max
@@ -100,7 +58,7 @@ export default function HomePage() {
               </div>
             ) : (
               <EmptyData />
-            )}
+            )} */}
           </Tabs.Content>
         ))}
       </Tabs.Root>

@@ -1,13 +1,19 @@
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 import { EmptyData, Loader } from "../../components";
 import OrgCard, { Organization } from "../../components/OrgCard";
+import { useGetUsername } from "../../hooks";
 import useFetchOrgs from "../../hooks/useFetchUser";
 
 export default function OrganizationsPage() {
-  const [searchParams] = useSearchParams();
-  const username = searchParams.get("username") as string;
+  const username = useGetUsername();
 
-  const { isLoading, data } = useFetchOrgs(username);
+  const { isLoading, data, refetch } = useFetchOrgs(username);
+
+  useEffect(() => {
+    if (username) {
+      refetch();
+    }
+  }, [username]);
 
   if (isLoading) {
     return <Loader className="mt-64" />;
