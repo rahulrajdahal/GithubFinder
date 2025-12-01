@@ -10,9 +10,11 @@ export default function RepositoriesPage() {
     return <Loader className="mt-64" />;
   }
 
-  return (data as Repository[])?.length > 0 ? (
-    (data as Repository[])?.map((repo) => (
-      <RepoCard key={repo.id} repo={repo} />
+  const repositories = data as Repository[];
+
+  return repositories.length > 0 ? (
+    repositories.map((repository) => (
+      <RepoCard key={repository.id} repo={repository} />
     ))
   ) : (
     <EmptyData className="mt-0 col-span-full" />

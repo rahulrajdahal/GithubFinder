@@ -6,7 +6,7 @@ import UserData from "./UserData";
 const tabs = [
   { id: 1, title: "Repositories", content: <Repositories /> },
   { id: 2, title: "Organizations", content: <Organizations /> },
-];
+] as const;
 
 export default function HomePage() {
   return (
