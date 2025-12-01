@@ -1,6 +1,5 @@
 import * as Tabs from "@radix-ui/react-tabs";
 import { useQueries } from "@tanstack/react-query";
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Organizations, Repositories } from "..";
 import { EmptyData, HomePageLayout, Loader, UserData } from "../../components";
@@ -37,7 +36,7 @@ export default function HomePage() {
           );
           return response.json();
         },
-        enabled: !!searchParams.get("username"),
+        // enabled: !!searchParams.get("username"),
       },
       {
         queryKey: ["orgs"],
@@ -47,18 +46,18 @@ export default function HomePage() {
           );
           return response.json();
         },
-        enabled: !!searchParams.get("username"),
+        // enabled: !!searchParams.get("username"),
       },
     ],
   });
 
-  useEffect(() => {
-    if (searchParams.get("username")) {
-      refetch();
-      refetchRepos();
-      refetchOrgs();
-    }
-  }, [searchParams, refetch, refetchRepos, refetchOrgs]);
+  // useEffect(() => {
+  //   if (searchParams.get("username")) {
+  //     refetch();
+  //     refetchRepos();
+  //     refetchOrgs();
+  //   }
+  // }, [searchParams, refetch, refetchRepos, refetchOrgs]);
 
   return (
     <HomePageLayout>
