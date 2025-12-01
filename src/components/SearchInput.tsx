@@ -21,7 +21,7 @@ export default function SearchInput({
         placeholder="Enter Github Username"
         name="search"
         id="search"
-        className="bg-white border-none w-full outline-none"
+        className="bg-transparent border-none w-full outline-none"
         {...inputProps}
       />
     </fieldset>

@@ -21,6 +21,14 @@ export default function HomePageLayout({
     setSearchParams({ username });
   };
 
+  const handleOnKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    const { key } = e;
+
+    if (key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className="flex items-center flex-col justify-center">
       <a href="/" className="flex items-center gap-3 mt-16 mb-11">
@@ -41,6 +49,7 @@ export default function HomePageLayout({
           inputProps={{
             value: username,
             onChange: handleSearchOnChange,
+            onKeyDown: handleOnKeyDown,
           }}
         />
 
