@@ -1,11 +1,14 @@
 import * as Tabs from "@radix-ui/react-tabs";
-import { Organizations, Repositories } from "..";
+import { lazy, Suspense } from "react";
 import { HomePageLayout } from "../../components";
-import UserData from "./UserData";
+
+const Repositories = lazy(() => import("./Repositories"));
+const Organizations = lazy(() => import("./Organizations"));
+const UserData = lazy(() => import("./UserData"));
 
 const tabs = [
-  { id: 1, title: "Repositories", content: <Repositories /> },
-  { id: 2, title: "Organizations", content: <Organizations /> },
+  { id: 1, title: "Repositories", Content: Repositories },
+  { id: 2, title: "Organizations", Content: Organizations },
 ] as const;
 
 export default function HomePage() {
@@ -22,27 +25,29 @@ export default function HomePage() {
           {tabs.map(({ id, title }) => (
             <Tabs.Trigger
               key={id}
-              className="text-grey-400 text-lg data-[state=active]:border-b-2 data-[state=active]:border-blue-default leading-4.5 font-bold data-[state=active]:text-blue-default"
+              className="text-grey-600 text-lg data-[state=active]:border-b-2 data-[state=active]:border-blue-default leading-4.5 font-bold data-[state=active]:text-blue-default transition-colors duration-300"
               value={title}
             >
               {title}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
-        {tabs.map(({ id, title, content }) => (
+        {tabs.map(({ id, title, Content }) => (
           <Tabs.Content
             key={id}
             className="flex w-full outline-none border-none flex-col items-center"
             value={title}
           >
-            <div className="flex flex-col md:flex-row max-w-235 w-full gap-5">
-              <UserData />
-              <div
-                className={`grid place-items-center grid-cols-2 gap-5 w-full`}
-              >
-                {content}
+            <Suspense fallback={<div>Loading data...</div>}>
+              <div className="flex flex-col md:flex-row max-w-235 w-full gap-5">
+                <UserData />
+                <div
+                  className={`grid place-items-center grid-cols-2 gap-5 w-full`}
+                >
+                  <Content />
+                </div>
               </div>
-            </div>
+            </Suspense>
           </Tabs.Content>
         ))}
       </Tabs.Root>

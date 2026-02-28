@@ -5,5 +5,5 @@ export default function UserData() {
   const username = useGetUsername();
   const { isLoading, data } = useFetchUser(username);
 
-  return data ? <UserCard data={data} isLoading={isLoading} /> : null;
+  return data ? <UserCard data={data as any} isLoading={isLoading} /> : null;
 }

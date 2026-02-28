@@ -1,3 +1,4 @@
+import { memo } from "react";
 export type Organization = {
   id: string;
   login: string;
@@ -8,15 +9,17 @@ interface OrgCardProps {
   org: Organization;
 }
 
-export default function OrgCard({ org }: Readonly<OrgCardProps>) {
+export default memo(function OrgCard({ org }: Readonly<OrgCardProps>) {
   return (
-    <div className="p-4 flex items-end gap-12 w-full rounded-lg bg-grey-100 max-w-[18.75rem] max-h-40 h-full">
+    <div className="p-4 flex items-end gap-12 w-full rounded-lg bg-grey-100 max-w-[18.75rem] max-h-40 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer">
       <img
         src={org.avatar_url}
         width={200}
         height={200}
         className="w-16 h-16 rounded-full"
         alt={org.login}
+        loading="lazy"
+        decoding="async"
       />
 
       <span className="flex flex-col gap-[0.38rem]">
@@ -29,4 +32,4 @@ export default function OrgCard({ org }: Readonly<OrgCardProps>) {
       </span>
     </div>
   );
-}
+});

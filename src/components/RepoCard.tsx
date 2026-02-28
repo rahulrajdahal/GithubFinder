@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { StarIcon } from "../assets";
 
 export type Repository = { id: string; stargazers_count: number; name: string };
@@ -5,9 +6,9 @@ interface RepoCardProps {
   repo: Repository;
 }
 
-export default function RepoCard({ repo }: Readonly<RepoCardProps>) {
+export default memo(function RepoCard({ repo }: Readonly<RepoCardProps>) {
   return (
-    <div className="p-4 flex flex-col gap-12 w-full rounded-lg bg-grey-100 md:min-w-[18.75rem] md:max-h-40 h-full">
+    <div className="p-4 flex flex-col gap-12 w-full rounded-lg bg-grey-100 md:min-w-[18.75rem] md:max-h-40 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer">
       <span className="flex items-center gap-1 justify-end">
         <img
           src={StarIcon}
@@ -15,6 +16,8 @@ export default function RepoCard({ repo }: Readonly<RepoCardProps>) {
           height={16}
           className="w-4 h-4 rounded-full"
           alt={"github - search star"}
+          loading="lazy"
+          decoding="async"
         />
         <p className="text-grey-800 text-sm font-semibold">
           {repo.stargazers_count < 10 && repo.stargazers_count !== 0
@@ -32,4 +35,4 @@ export default function RepoCard({ repo }: Readonly<RepoCardProps>) {
       </span>
     </div>
   );
-}
+});

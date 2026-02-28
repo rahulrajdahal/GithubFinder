@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Loader from "./Loader";
 
 type User = {
@@ -12,7 +13,7 @@ interface UserCardProps {
   orgsCount?: number;
   isLoading?: boolean;
 }
-export default function UserCard({
+export default memo(function UserCard({
   data,
   orgsCount = 0,
   isLoading = false,
@@ -22,13 +23,15 @@ export default function UserCard({
   }
 
   return (
-    <div className="md:sticky top-4 flex border h-[21.25rem] w-full max-w-[18.75rem] border-gray-300 bg-white rounded-lg flex-col gap-6 items-center justify-center px-8 py-10">
+    <div className="md:sticky top-4 flex border h-[21.25rem] w-full max-w-[18.75rem] border-gray-300 bg-white rounded-lg flex-col gap-6 items-center justify-center px-8 py-10 transition-all duration-500 hover:shadow-lg">
       <img
         src={data.avatar_url}
         width={200}
         height={200}
         className="w-20 h-20 rounded-full"
         alt={data.name}
+        loading="lazy"
+        decoding="async"
       />
       <span className="flex flex-col -mt-1 gap-2 items-center">
         <strong className="text-grey-800 text-2xl leading-6 font-bold">
@@ -64,4 +67,4 @@ export default function UserCard({
       </div>
     </div>
   );
-}
+});

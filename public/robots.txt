@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://github-searches.netlify.app/sitemap.xml
