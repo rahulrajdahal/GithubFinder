@@ -8,7 +8,7 @@ export default function SearchInput({
   inputProps,
 }: Readonly<SearchInputProps>) {
   return (
-    <fieldset className="border p-[1.12rem] w-full max-w-[35rem] flex gap-3 items-center bg-gray-50 rounded-xl border-gray-400">
+    <fieldset className="border p-[1.12rem] w-full max-w-[35rem] flex gap-3 items-center bg-grey-50 rounded-xl border-grey-400">
       <img
         src={SearchIcon}
         alt="github search - search"
@@ -21,7 +21,7 @@ export default function SearchInput({
         placeholder="Enter Github Username"
         name="search"
         id="search"
-        className="bg-transparent border-none w-full outline-none"
+        className="bg-transparent border-none w-full outline-none placeholder:text-grey-600"
         {...inputProps}
       />
     </fieldset>

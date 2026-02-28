@@ -59,7 +59,7 @@ export default function HomePageLayout({
         <Button onClick={handleSearch}>Search</Button>
       </div>
 
-      <hr className="text-grey-300 w-full max-w-360 mt-10 mb-8" />
+      <hr className="text-grey-400 w-full max-w-360 mt-10 mb-8" />
       {children}
     </div>
   );
