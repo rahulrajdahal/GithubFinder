@@ -5,4 +5,5 @@ export { default as Loader } from "./Loader";
 export { default as OrgCard } from "./OrgCard";
 export { default as RepoCard } from "./RepoCard";
 export { default as SearchInput } from "./SearchInput";
-export { default as UserData } from "./UserData";
+export { default as UserCard } from "./UserCard";
+

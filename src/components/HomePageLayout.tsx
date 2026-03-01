@@ -1,4 +1,4 @@
-import { ChangeEvent, PropsWithChildren, useState } from "react";
+import { ChangeEvent, PropsWithChildren, useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { GithubIcon } from "../assets";
 import Button from "./Button";
@@ -12,14 +12,25 @@ export default function HomePageLayout({
 
   const [username, setUsername] = useState(searchParams.get("username") ?? "");
 
-  const handleSearchOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setUsername(value);
-  };
+  const handleSearchOnChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setUsername(e.target.value);
+    },
+    []
+  );
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     setSearchParams({ username });
-  };
+  }, [username, setSearchParams]);
+
+  const handleOnKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === "Enter") {
+        handleSearch();
+      }
+    },
+    [handleSearch]
+  );
 
   return (
     <div className="flex items-center flex-col justify-center">
@@ -41,13 +52,14 @@ export default function HomePageLayout({
           inputProps={{
             value: username,
             onChange: handleSearchOnChange,
+            onKeyDown: handleOnKeyDown,
           }}
         />
 
         <Button onClick={handleSearch}>Search</Button>
       </div>
 
-      <hr className="text-grey-300 w-full max-w-[90rem] mt-10 mb-8" />
+      <hr className="text-grey-400 w-full max-w-360 mt-10 mb-8" />
       {children}
     </div>
   );

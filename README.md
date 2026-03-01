@@ -1,70 +1,106 @@
-# [Github Search](https://github-searches.netlify.app/). Find your repositories
+# GithubSearch
 
-## 🏗 Installation
+![GithubSearch](https://github-searches.netlify.app/logo.svg)
 
-### 1. clone the repository
+> Find your GitHub repositories and organizations effortlessly.
+
+## Preview
+
+![Github Search](./screenshots/GithubSearch.png)
+![Repos](./screenshots/repos.png)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/github-searches/deploy-status)](https://github-searches.netlify.app/)
+[![CI status](https://github.com/rahulrajdahal/GithubSearch/actions/workflows/test.yml/badge.svg)](https://github.com/rahulrajdahal/GithubSearch/actions)
+
+**[Visit the Live Application](https://github-searches.netlify.app/)**
+
+---
+
+## 📖 Walkthrough: What does this application do?
+
+GithubSearch is a highly-optimized, modern web application designed to help you quickly look up GitHub users, their repositories, and organizations.
+
+**Key Features:**
+
+- **Lightning Fast Searches:** Built with React and structured around efficient data fetching and rendering.
+- **Optimized Performance:** Utilizes strictly memoized components (`React.memo`) and image `lazy` loading to ensure maximum rendering speed, even when displaying thousands of repositories.
+- **Automated Code Splitting:** Heavy subcomponents and page chunks are automatically code-split dynamically through `React.lazy` and `Suspense`, granting you instant Time-to-Interactive metrics.
+- **Fully SEO Compliant:** Generates proper Opengraph identifiers, `robots.txt`, `sitemap.xml`, and adheres to web semantics to be search-engine ready from day one.
+
+## 🏗 Installation & Local Setup
+
+### 1. Clone the repository
 
 ```sh
 git clone https://github.com/rahulrajdahal/GithubFinder.git
+cd GithubFinder
 ```
 
 ### 2. Install Dependencies
 
-#### pnpm
+You can use `npm`, `yarn`, or `pnpm`.
 
 ```sh
-cd GithubSearch && pnpm install
+npm install
 ```
 
-### 3. Run development server
+### 3. Run Development Server
 
 ```sh
-pnpm run dev
+npm run dev
 ```
 
-#### OR
+Visit `http://localhost:5173` to view the application in your browser.
 
-### Run Production server
+---
+
+## 🧪 Testing and CI/CD
+
+This application is thoroughly tested using **Vitest** and **React Testing Library**. A GitHub Actions workflow runs all tests automatically upon any Pull Request to the `main` branch to guarantee flawless merges.
+
+### Run Tests Locally
 
 ```sh
-pnpm run preview
+# Run Unit Tests
+npm run test:unit
+
+# Run Component tests
+npx vitest run --project=component
 ```
-
-## Preview
-
-[![Github Search](./screenshots/GithubSearch.png)](https://github-searches.netlify.app/)
-![GithubSearch](./screenshots/repos.png)
 
 ## 🚀 Project Structure
 
-Inside of project [Github Search](https://github-searches.netlify.app/), you'll see the following folders and files:
-
 ```text
 /
-├── public/
-│   └── logo.svg
+├── .github/
+│   └── workflows/
+│       └── test.yml       # CI/CD Action file
+├── public/                # Static assets, robots, and sitemap.xml
 ├── src/
-|   ├── assets/
-│   │   ├── icon.svg
-|   ├── components/
-│   │   ├── Component.tsx
-|   ├── pages/
-│   │   ├── Page.tsx
-└── index.html
-└── tailwind.config.js
-└── pwa-assets.config.ts
-└── README.md
-└── package.json
+│   ├── assets/            # SVG icons and visual assets
+│   ├── components/        # Memoized, reusable UI components (UserCard, Button, SearchInput)
+│   ├── hooks/             # Custom React Hooks
+│   ├── pages/             # Lazy-loaded page view structure
+│   ├── utils/             # Helper utilities and API handlers
+│   └── App.tsx            # Main application root and layout boundary
+├── index.html             # Document source initialized with SEO standard headers
+├── package.json           # NPM configuration, dependencies, and action scripts
+└── vite.config.ts         # Vite bundler structure and Vitest parameters
 ```
 
-## 🧞 Commands
+## 🧞 Available Script Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands are run from the root of the project:
 
-| Command            | Action                                        |
-| :----------------- | :-------------------------------------------- |
-| `pnpm install`     | Installs dependencies.                        |
-| `pnpm run dev`     | Starts local dev server at `localhost:5173`.  |
-| `pnpm run build`   | Build your production site to `./dist/`.      |
-| `pnpm run preview` | Preview your build locally, before deploying. |
-| `pnpm run lint`    | Check all linting errors.                     |
+| Command             | Action                                           |
+| :------------------ | :----------------------------------------------- |
+| `npm install`       | Installs all project dependencies.               |
+| `npm run dev`       | Starts the local dev server at `localhost:5173`. |
+| `npm run build`     | Builds the production bundle into `./dist/`.     |
+| `npm run preview`   | Previews your production build locally.          |
+| `npm run test:unit` | Runs the Vitest utility tests suite.             |
+| `npm run test:ui`   | Opens the Vitest UI dashboard locally.           |
+
+---
+
+**Note**: _This project is a streamlined, user-friendly implementation of the GitHub API tailored for rapid querying and excellent performance._

@@ -1,3 +1,6 @@
+import { memo } from "react";
+import Loader from "./Loader";
+
 type User = {
   name: string;
   avatar_url: string;
@@ -5,22 +8,30 @@ type User = {
   public_repos: number;
 };
 
-interface UserDataProps {
+interface UserCardProps {
   data: User;
   orgsCount?: number;
+  isLoading?: boolean;
 }
-export default function UserData({
+export default memo(function UserCard({
   data,
   orgsCount = 0,
-}: Readonly<UserDataProps>) {
+  isLoading = false,
+}: Readonly<UserCardProps>) {
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
-    <div className="md:sticky top-4 flex border h-[21.25rem] w-full max-w-[18.75rem] border-gray-300 bg-white rounded-lg flex-col gap-6 items-center justify-center px-8 py-10">
+    <div className="md:sticky top-4 flex border h-[21.25rem] w-full max-w-[18.75rem] border-grey-400 bg-white rounded-lg flex-col gap-6 items-center justify-center px-8 py-10 transition-all duration-500 hover:shadow-lg">
       <img
         src={data.avatar_url}
         width={200}
         height={200}
         className="w-20 h-20 rounded-full"
         alt={data.name}
+        loading="lazy"
+        decoding="async"
       />
       <span className="flex flex-col -mt-1 gap-2 items-center">
         <strong className="text-grey-800 text-2xl leading-6 font-bold">
@@ -31,7 +42,7 @@ export default function UserData({
         </p>
       </span>
 
-      <hr className="text-grey-300 w-full" />
+      <hr className="text-grey-400 w-full" />
 
       <div className="flex items-center gap-[2.38rem]">
         <span className="flex flex-col gap-1">
@@ -56,4 +67,4 @@ export default function UserData({
       </div>
     </div>
   );
-}
+});
